@@ -21,7 +21,7 @@ public interface UserService {
 
     Trains getTrain(Long trainId);
 
-    Bookings addBooking(Bookings bookings, Long trainId);
+    String addBooking(Bookings bookings, Long trainId);
 
     List<Object> getTicket(String email);
 

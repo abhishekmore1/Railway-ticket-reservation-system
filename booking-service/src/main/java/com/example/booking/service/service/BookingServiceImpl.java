@@ -3,7 +3,10 @@ package com.example.booking.service.service;
 import com.example.booking.service.entity.Bookings;
 import com.example.booking.service.entity.Trains;
 import com.example.booking.service.repository.BookingRepository;
+import com.example.booking.service.twilio.SmsSender;
+import com.example.booking.service.twilio.TwilioSmsSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -20,16 +23,22 @@ public class BookingServiceImpl implements BookingService{
     private JavaMailSender mailSender;
     @Autowired
     private RestTemplate restTemplate;
+    private SmsSender smsSender;
 
-    public void addBooking(Bookings booking, Long trainId){
-        Trains train=restTemplate.getForObject("http://train-service:8081/train/getTrain/"+trainId,Trains.class);
-        booking.setTrainId(trainId);
-        booking.setSource(train.getFromStation());
-        booking.setDestination(train.getToStation());
-        booking.setTotalPrice((double) (booking.getNoOfTickets()*train.getTicketFare()));
 
-        bookingRepository.save(booking);
-        simpleMailSender(booking,train);
+    public void addBooking(Bookings bookings, Long trainId){
+        Trains trains=restTemplate.getForObject("http://train-service:8081/train/getTrain/"+trainId,Trains.class);
+        bookings.setTrainId(trainId);
+        bookings.setSource(trains.getFromStation());
+        bookings.setDestination(trains.getToStation());
+        bookings.setTotalPrice((double) (bookings.getNoOfTickets()*trains.getTicketFare()));
+
+        bookingRepository.save(bookings);
+        simpleMailSender(bookings,trains);
+        smsSender.sendSms(bookings.getPassengerPhNo(),
+                "PNR No: "+bookings.getPnrNo()+"\nName: "+bookings.getPassengerName()+"\nTrain name: "+trains.getTrainName()+
+                        "\nPhone No: "+bookings.getPassengerPhNo()+"\nEmail: "+bookings.getPassengerEmail()+"\nSource: "+trains.getFromStation()+
+                        "\nDestination: "+trains.getFromStation()+"\nTotal no of tickets: "+bookings.getNoOfTickets()+"\nTotalPrice: "+(double) (bookings.getNoOfTickets()*trains.getTicketFare()));
     }
 
     @Override
@@ -59,6 +68,11 @@ public class BookingServiceImpl implements BookingService{
 
         mailSender.send(message);
         System.out.println("Mail send...");
+    }
+
+    @Autowired
+    public void Service(@Qualifier("twilio") TwilioSmsSender smsSender) {
+        this.smsSender = smsSender;
     }
 
 }

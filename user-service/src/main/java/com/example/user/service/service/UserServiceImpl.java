@@ -68,8 +68,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Bookings addBooking(Bookings bookings, Long trainId) {
-        return restTemplate.postForObject("http://booking-service:8084/booking/bookTicket/"+trainId,bookings,Bookings.class);
+    public String addBooking(Bookings bookings, Long trainId) {
+        return restTemplate.postForObject("http://booking-service:8084/booking/bookTicket/"+trainId,bookings,String.class);
     }
 
     @Override

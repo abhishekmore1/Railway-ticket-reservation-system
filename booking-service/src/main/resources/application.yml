@@ -11,3 +11,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+twilio:
+  account_sid: AC53fd6e2045febb3bc221417f9652a642
+  auth_token: 34857103116ea991416c6adc53972e0f
+  trial_number: +19895107622

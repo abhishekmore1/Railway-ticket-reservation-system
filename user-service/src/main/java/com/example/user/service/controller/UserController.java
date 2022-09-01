@@ -106,7 +106,7 @@ public class UserController {
     }
 
     @PostMapping("/bookTicket/{trainId}")
-    public Bookings addBooking(@RequestBody Bookings bookings, @PathVariable("trainId") Long trainId){
+    public String addBooking(@RequestBody Bookings bookings, @PathVariable("trainId") Long trainId){
         return userService.addBooking(bookings,trainId);
     }
 
