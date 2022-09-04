@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/train")
 public class TrainController {
@@ -17,6 +18,7 @@ public class TrainController {
     @Autowired
     private TrainRepository trainRepository;
 
+    @CrossOrigin("http://localhost:4200")
     @GetMapping("/")
     public String hello(){
         return "From train service";

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.print.Book;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/booking")
 public class BookingController {

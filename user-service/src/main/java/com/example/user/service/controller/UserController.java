@@ -15,7 +15,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.lang.model.util.Elements;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/user")
@@ -66,6 +68,7 @@ public class UserController {
     }
 
     //New user registration as add user
+//    @CrossOrigin("http://localhost:4200/register")
     @PostMapping("/userRegistration")
     public RegisterUser addUser(@RequestBody RegisterUser user){
         return userService.addUser(user);
