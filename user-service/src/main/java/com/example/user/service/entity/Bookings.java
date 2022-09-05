@@ -23,7 +23,7 @@ public class Bookings {
             generator="booking_sequence"
     )
     private Long pnrNo;
-    private Long trainId;
+    private Long trainName;
     private String passengerName;
     private String passengerPhNo;
     private String passengerEmail;

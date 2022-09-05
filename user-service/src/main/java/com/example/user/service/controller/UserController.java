@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.lang.model.util.Elements;
+import javax.ws.rs.OPTIONS;
 import java.util.List;
 
 
@@ -62,13 +63,13 @@ public class UserController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
-    @GetMapping("/")
+    @GetMapping("/userRegistration")
     public String hello(){
         return "From user service";
     }
 
     //New user registration as add user
-//    @CrossOrigin("http://localhost:4200/register")
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/userRegistration")
     public RegisterUser addUser(@RequestBody RegisterUser user){
         return userService.addUser(user);

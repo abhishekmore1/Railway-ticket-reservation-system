@@ -23,12 +23,13 @@ public class BookingServiceImpl implements BookingService{
     private JavaMailSender mailSender;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
     private SmsSender smsSender;
 
 
     public void addBooking(Bookings bookings, Long trainId){
         Trains trains=restTemplate.getForObject("http://train-service:8081/train/getTrain/"+trainId,Trains.class);
-        bookings.setTrainId(trainId);
+        bookings.setTrainName(trains.getTrainName());
         bookings.setSource(trains.getFromStation());
         bookings.setDestination(trains.getToStation());
         bookings.setTotalPrice((double) (bookings.getNoOfTickets()*trains.getTicketFare()));
@@ -38,7 +39,7 @@ public class BookingServiceImpl implements BookingService{
         smsSender.sendSms(bookings.getPassengerPhNo(),
                 "PNR No: "+bookings.getPnrNo()+"\nName: "+bookings.getPassengerName()+"\nTrain name: "+trains.getTrainName()+
                         "\nPhone No: "+bookings.getPassengerPhNo()+"\nEmail: "+bookings.getPassengerEmail()+"\nSource: "+trains.getFromStation()+
-                        "\nDestination: "+trains.getFromStation()+"\nTotal no of tickets: "+bookings.getNoOfTickets()+"\nTotalPrice: "+(double) (bookings.getNoOfTickets()*trains.getTicketFare()));
+                        "\nDestination: "+trains.getToStation()+"\nDate:"+trains.getDate()+"\nTime:"+trains.getTime()+"\nTotal no of tickets: "+bookings.getNoOfTickets()+"\nTotalPrice: "+(double) (bookings.getNoOfTickets()*trains.getTicketFare()));
     }
 
     @Override
@@ -63,7 +64,7 @@ public class BookingServiceImpl implements BookingService{
         message.setTo("dhaaneshwar@gmail.com");
         message.setText("PNR No: "+bookings.getPnrNo()+"\nName: "+bookings.getPassengerName()+"\nTrain name: "+trains.getTrainName()+
                 "\nPhone No: "+bookings.getPassengerPhNo()+"\nEmail: "+bookings.getPassengerEmail()+"\nSource: "+trains.getFromStation()+
-                "\nDestination: "+trains.getFromStation()+"\nTotal no of tickets: "+bookings.getNoOfTickets()+"\nTotalPrice: "+(double) (bookings.getNoOfTickets()*trains.getTicketFare()));
+                "\nDestination: "+trains.getFromStation()+"\nDate:"+trains.getDate()+"\nTime:"+trains.getTime()+"\nTotal no of tickets: "+bookings.getNoOfTickets()+"\nTotalPrice: "+(double) (bookings.getNoOfTickets()*trains.getTicketFare()));
         message.setSubject("Ticket confirmation");
 
         mailSender.send(message);

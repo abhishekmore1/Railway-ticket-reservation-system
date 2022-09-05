@@ -23,7 +23,7 @@ public class Bookings {
             generator="booking_sequence"
     )
     private Long pnrNo;
-    private Long trainId;
+    private String trainName;
     private String passengerName;
     private String passengerPhNo;
     private String passengerEmail;
@@ -31,4 +31,8 @@ public class Bookings {
     private String destination;
     private Long noOfTickets;
     private Double totalPrice;
+	public void setTrainId(long l) {
+		// TODO Auto-generated method stub
+		
+	}
 }
