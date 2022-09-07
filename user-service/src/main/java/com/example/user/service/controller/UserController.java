@@ -20,6 +20,7 @@ import javax.ws.rs.OPTIONS;
 import java.util.List;
 
 
+@CrossOrigin(allowedHeaders = "*",origins = "*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -60,10 +61,12 @@ public class UserController {
         //jwtTokenUtil needs userDetails in order to create jwt
         final String jwt=jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        RegisterUser foundUser=userRepository.findByUserEmail(username);
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt,foundUser));
     }
 
-    @GetMapping("/userRegistration")
+    @GetMapping("/")
     public String hello(){
         return "From user service";
     }
@@ -71,8 +74,9 @@ public class UserController {
     //New user registration as add user
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/userRegistration")
-    public RegisterUser addUser(@RequestBody RegisterUser user){
-        return userService.addUser(user);
+    public String addUser(@RequestBody RegisterUser user){
+        userService.addUser(user);
+        return "User registration successful!";
     }
 
 
@@ -88,8 +92,9 @@ public class UserController {
 
     //User can update his/her details
     @PutMapping("/updateUser/{userId}")
-    public RegisterUser updateUser(@PathVariable("userId") Long userId,@RequestBody RegisterUser user){
-        return userService.updateUser(userId,user);
+    public String updateUser(@PathVariable("userId") Long userId,@RequestBody RegisterUser user){
+        userService.updateUser(userId,user);
+        return "User updation successful";
     }
 
 //    @PostMapping("/addTrain")

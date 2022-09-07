@@ -36,22 +36,22 @@ public class UserServiceApplication {
 		return new RestTemplate();
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer(){
-
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry
-						.addMapping("/**")
-						.allowedOrigins("*")
-						.allowedHeaders("*")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowCredentials(false)
-						.maxAge(3600L);
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer(){
+//
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry
+//						.addMapping("/**")
+//						.allowedOriginPatterns("*")
+//						.allowedHeaders("*")
+//						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS","HEAD")
+//						.allowCredentials(false)
+//						.maxAge(3600L);
+//			}
+//		};
+//	}
 
 	@Bean
 	public Docket swaggerConfiguration(){
