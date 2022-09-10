@@ -65,8 +65,9 @@ public class AdminController {
     //   To add train
 
     @PostMapping("/addTrain")
-    public Trains addTrain(@RequestBody Trains train){
-        return adminService.addTrain(train);
+    public String addTrain(@RequestBody Trains train){
+        adminService.addTrain(train);
+        return "Train is added successfully";
     }
 
 //    To delete train

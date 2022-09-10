@@ -12,10 +12,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
-#twilio:
-#  account_sid:
-#  auth_token:
-#  trial_number: +19895107622
-
-id: AC53fd6e2045febb3bc221417f9652a642
-token: 59d4548a61b2c1e90c8f14a723c8b969
+twilio:
+  account_sid:  ACad5261524e2f0e05c594ca8f384af7b7
+  auth_token: e667de6bc709ac296c2b2ac6b56c2d0a
+  trial_number: +13512137073

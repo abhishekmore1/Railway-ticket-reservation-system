@@ -57,6 +57,7 @@ public class TrainController {
     }
 
     //To view all the available trains
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/getAllTrain")
     public List<Trains> getAllTrain(){
         return trainService.getAllTrain();
