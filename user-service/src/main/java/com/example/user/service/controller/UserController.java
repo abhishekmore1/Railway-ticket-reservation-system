@@ -14,6 +14,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.lang.model.util.Elements;
 import javax.ws.rs.OPTIONS;
@@ -37,6 +38,8 @@ public class UserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtUtil jwtTokenUtil;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping(value = "/authenticate",method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
@@ -46,13 +49,12 @@ public class UserController {
 
         try
         {
-            //using authentication manager in order to authenticate using username and password
+            //using authentication manager in order to authenticate username and password
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
         }
         catch(BadCredentialsException e)
         {
             throw new Exception("Incorrect username and password",e);
-//            return ResponseEntity.ok("Incorrect username and password");
         }
         //if authenticated create jwt token
 
@@ -96,11 +98,6 @@ public class UserController {
         userService.updateUser(userId,user);
         return "User updation successful";
     }
-
-//    @PostMapping("/addTrain")
-//    public Trains addTrain(@RequestBody Trains train){
-//        return userService.addTrain(train);
-//    }
 
     //admin and passengers can view the train details
     @GetMapping("/getTrain/{trainId}")

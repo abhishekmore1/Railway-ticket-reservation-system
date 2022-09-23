@@ -8,7 +8,11 @@ import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Bookings,Long> {
-    Bookings getByPassengerEmail(String email);
+//    Bookings getByPassengerEmail(String email);
 
     List<Bookings> findByPassengerEmail(String email);
+
+    Bookings findByPnrNo(Long email);
+
+	Object getByPassengerEmail(String string);
 }

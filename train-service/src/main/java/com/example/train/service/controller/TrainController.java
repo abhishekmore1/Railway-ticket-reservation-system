@@ -45,15 +45,6 @@ public class TrainController {
     @GetMapping("/{from}/and/{to}")
     public List<Trains> getTrainByLocation(@PathVariable("from") String from, @PathVariable("to") String to){
         return trainService.getTrainByFromStationToStation(from,to);
-//        List<Trains> s = trainRepository.findAll();
-//        for(Trains d: s)
-//        {
-//            if(d.getFromStation().equals(from) && d.getToStation().equals(to) )
-//            {
-//                return d;
-//            }
-//        }
-//        return null;
     }
 
     //To view all the available trains

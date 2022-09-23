@@ -8,8 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="train-service" />
-        <module name="search-service" />
         <module name="booking-service" />
+        <module name="spring-paypal-payment-gateway" />
         <module name="api-gateway" />
         <module name="user-service" />
         <module name="eureka-server" />
@@ -22,6 +22,7 @@
       <module name="api-gatewaay.test" target="17" />
       <module name="api-gateway.main" target="1.8" />
       <module name="api-gateway.test" target="1.8" />
+      <module name="search-service" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -31,6 +32,7 @@
       <module name="booking-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="search-service" options="-parameters" />
+      <module name="spring-paypal-payment-gateway" options="-parameters" />
       <module name="train-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>

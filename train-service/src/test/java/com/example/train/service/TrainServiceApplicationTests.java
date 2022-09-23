@@ -55,14 +55,14 @@ class TrainServiceApplicationTests {
 	@Test
 	@DisplayName("GetTrain")
 	void getTrain() {
-		Trains train=trainRepository.findById(1L).get();
+		Trains train=trainRepository.findById(3L).get();
 		assertAll(
-				()->assertEquals("ABCExpress",train.getTrainName()),
-				()->assertEquals("Delhi",train.getFromStation()),
-				()->assertEquals("Bangalore",train.getToStation()),
+				()->assertEquals("BangloreExpress",train.getTrainName()),
+				()->assertEquals("Banglore",train.getFromStation()),
+				()->assertEquals("Pune",train.getToStation()),
 				()->assertEquals(200,train.getTicketFare()),
-				()->assertEquals("12/12/22",train.getDate()),
-				()->assertEquals("12:34",train.getTime())
+				()->assertEquals("29/08/2022",train.getDate()),
+				()->assertEquals("12:00",train.getTime())
 
 		);
 	}
@@ -79,8 +79,8 @@ class TrainServiceApplicationTests {
 	@Test
 	@DisplayName("DeleteTrain")
 	void deleteTrain() {
-		trainRepository.deleteByTrainName("aaa");
-		assertFalse(trainRepository.existsByTrainName("aaa"));
+		trainRepository.deleteByTrainName("xyz");
+		assertFalse(trainRepository.existsByTrainName("xyz"));
 	}
 
 

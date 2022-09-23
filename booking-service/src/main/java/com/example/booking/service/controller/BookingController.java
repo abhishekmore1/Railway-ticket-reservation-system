@@ -1,6 +1,7 @@
 package com.example.booking.service.controller;
 
 import com.example.booking.service.entity.Bookings;
+import com.example.booking.service.repository.BookingRepository;
 import com.example.booking.service.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -16,6 +17,9 @@ import java.util.List;
 public class BookingController {
 
     @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
     private BookingService bookingService;
 
     @GetMapping("/")
@@ -28,6 +32,11 @@ public class BookingController {
         bookingService.addBooking(bookings,trainId);
         return "Booking successful";
     }
+
+//    @GetMapping("/viewTicket/{pnr}")
+//    public Bookings getTicket(@PathVariable("pnr") Long email ) {
+//        return bookingRepository.findByPnrNo(email);
+//    }
 
     @GetMapping("/viewTicket/{email}")
     public List<Bookings> getTicket(@PathVariable("email") String email ) {

@@ -17,9 +17,6 @@ public class AuthenticationResponse {
         this.registerUser = registerUser;
     }
 
-//    public AuthenticationResponse(String jwt) {
-//        this.jwt = jwt;
-//    }
 
     public String getJwt(){
         return jwt;
