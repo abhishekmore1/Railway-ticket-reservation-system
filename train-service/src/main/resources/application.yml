@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://localhost:3306/railway-ticket_reservation-system
+    url: jdbc:mysql://localhost:3306/railway_ticket_reservation_system
     password: root
   jpa:
     hibernate:
